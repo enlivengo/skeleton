@@ -1,0 +1,21 @@
+{
+    "emeraldwalk.runonsave": {
+        "commands": [
+            {
+                "match": ".go",
+                "isAsync": false,
+                "cmd": "cd ${workspaceRoot} && go get"
+            },
+            {
+                "match": ".html",
+                "isAsync": false,
+                "cmd": "cd ${workspaceRoot} && rm -f ./statik/"
+            },
+            {
+                "match": ".html",
+                "isAsync": false,
+                "cmd": "cd ${workspaceRoot} && go generate ./..."
+            }
+        ]
+    }
+}
