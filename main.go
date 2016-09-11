@@ -14,6 +14,7 @@ import (
 	"github.com/enlivengo/static"
 	"github.com/enlivengo/statik"
 	"github.com/enlivengo/user"
+    "./settings"
 )
 
 func rootHandler(ctx *enliven.Context) {
@@ -34,24 +35,17 @@ func rootHandler(ctx *enliven.Context) {
 	ctx.Template("home")
 }
 
+func getConfig() config.Config {
+    args := os.Args[1:]
+    if (len(args) == 0) {
+        return settings.
+    }
+}
+
 // Example/Test usage
 func main() {
-	ev := enliven.New(config.Config{
-		"email_smtp_host":    "localhost",
-		"email_smtp_auth":    "none",
-		"email_from_default": "noreply@enliven.app",
 
-		"database_driver":   "postgres",
-		"database_host":     "127.0.0.1",
-		"database_user":     "postgres",
-		"database_dbname":   "enliven",
-		"database_password": "postgres",
-
-		"assets_static_route": "/assets/",
-		"assets_static_path":  "./static/",
-
-		"assets_statik_route": "/statik/",
-	})
+	ev := enliven.New(getConfig())
 
 	// Adding session management middleware
 	ev.AddMiddleware(session.NewMemoryStorageMiddleware())
